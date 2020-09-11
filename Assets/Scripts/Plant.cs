@@ -14,6 +14,7 @@ public class Plant : MonoBehaviour
         Grumpy = 4
     }
 
+    [System.Serializable]
     public class PlantEvent : UnityEvent<Plant> { }
 
     private float _growth = 0f;
@@ -23,18 +24,17 @@ public class Plant : MonoBehaviour
     [SerializeField]
     private Transform _root;
     [SerializeField]
-    private 
-    [SerializeField]
     private float MaxGrowthDuration = 5f;
     [SerializeField]
     private float MaxSize = 5f;
 
-    public PlantEvent OnPickEvent;
+    public PlantEvent OnPickEvent = new PlantEvent();
 
     public float GetPlantSize() => Mathf.Lerp(1, MaxSize, _growth / MaxGrowthDuration);
     public bool IsFullyGrown() => _growth >= MaxGrowthDuration;
-    public void PickPlant()
+    public void OnTapped()
     {
+        Debug.LogWarning($"Is grown = {IsFullyGrown()}");
         if (!IsFullyGrown()) return;
         OnPickEvent.Invoke(this);
         Destroy(gameObject);
