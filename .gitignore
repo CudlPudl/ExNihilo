@@ -60,3 +60,7 @@ crashlytics-build.properties
 
 ExNihilo/Library/
 ExNihilo/UserSettings/EditorUserSettings.asset
+ExNihilo/Temp/UnityLockfile
+ExNihilo/Temp/
+ExNihilo/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+ExNihilo/obj/
