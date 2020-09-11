@@ -24,13 +24,15 @@ public class Plant : MonoBehaviour
     [SerializeField]
     private Transform _root;
     [SerializeField]
+    private GrowthBlendshape _blendShape;
+    [SerializeField]
     private float MaxGrowthDuration = 5f;
     [SerializeField]
     private float MaxSize = 5f;
 
     public PlantEvent OnPickEvent = new PlantEvent();
 
-    public float GetPlantSize() => Mathf.Lerp(1, MaxSize, _growth / MaxGrowthDuration);
+    public float GetPlantSize() => Mathf.Clamp01(_growth / MaxGrowthDuration);
     public bool IsFullyGrown() => _growth >= MaxGrowthDuration;
     public void OnTapped()
     {
@@ -43,6 +45,6 @@ public class Plant : MonoBehaviour
     private void Update()
     {
         _growth += Time.deltaTime;
-        _root.localScale = new Vector3(1, GetPlantSize(), 1);
+        _blendShape.SetBlendValue(GetPlantSize());
     }
 }
